@@ -1,16 +1,14 @@
-// Dark Mode Toggle
+
 const themeSwitch = document.getElementById('themeSwitch');
 themeSwitch.addEventListener('change', () => {
   document.body.classList.toggle('dark');
 });
 
-// Tab Switch
 function switchTab(tabId) {
   document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
   document.getElementById(tabId).style.display = 'block';
 }
 
-// Toast Notification
 function showToast(msg) {
   const toast = document.getElementById('toast');
   toast.innerText = msg;
@@ -18,12 +16,10 @@ function showToast(msg) {
   setTimeout(() => toast.style.display = 'none', 3000);
 }
 
-// Progress Bar
 function setProgress(percent) {
   document.getElementById('progressBar').style.width = percent + '%';
 }
 
-// Image to PDF
 const imageInput = document.getElementById('imageInput');
 const imageDropZone = document.getElementById('imageDropZone');
 const imagePreview = document.getElementById('imagePreview');
@@ -81,7 +77,6 @@ document.getElementById('convertBtn').addEventListener('click', async () => {
   setProgress(0);
 });
 
-// PDF to Image
 const pdfInput = document.getElementById('pdfInput');
 const pdfDropZone = document.getElementById('pdfDropZone');
 const pdfPreview = document.getElementById('pdfPreview');
@@ -211,7 +206,6 @@ convertWordToPdfBtn.addEventListener('click', () => {
     pdf.save("converted-with-layout.pdf");
   });
 });
-// PDF to Word Conversion (dummy client-side workaround)
 const pdfToWordDropZone = document.getElementById('pdfToWordDropZone');
 const pdfToWordInput = document.getElementById('pdfToWordInput');
 const convertPdfToWordBtn = document.getElementById('convertPdfToWordBtn');
@@ -238,7 +232,6 @@ convertPdfToWordBtn.onclick = () => {
   alert("For actual PDF to Word conversion, backend is needed. Placeholder button only.");
 };
 
-// PDF Page Remover
 const pdfPageDropZone = document.getElementById('pdfPageDropZone');
 const pdfPageInput = document.getElementById('pdfPageInput');
 const removePagesBtn = document.getElementById('removePagesBtn');
@@ -266,7 +259,6 @@ removePagesBtn.onclick = () => {
   alert("Client-side page removal from PDF requires backend or wasm tools. Placeholder only.");
 };
 
-// Image Resizer
 const imageResizeDropZone = document.getElementById('imageResizeDropZone');
 const imageResizeInput = document.getElementById('imageResizeInput');
 const imageResizePreview = document.getElementById('imageResizePreview');
@@ -406,7 +398,6 @@ function switchTab(tabId) {
       window.scrollTo({ top: selectedTab.offsetTop - 50, behavior: 'smooth' });
     }
   
-    // Highlight active button
     const allButtons = document.querySelectorAll('header button');
     allButtons.forEach(btn => btn.classList.remove('active'));
   
@@ -431,7 +422,6 @@ function toggleTheme() {
   localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
 }
 
-// Load saved theme
 window.onload = function () {
   if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-mode');
