@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image ↔ PDF & More</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.0/jszip.min.js"></script>
+</head>
+<body>
+  <div class="header">
+    <h1>🖼️ File ConvertX </h1>
+    <label class="switch">
+      <input type="checkbox" id="themeSwitch" />
+      <span class="slider round"></span>
+    </label>
+  </div>
+
+  <nav class="tabs">
+    <button onclick="switchTab('imageToPdf')">Image ➜ PDF</button>
+    <button onclick="switchTab('pdfToImage')">PDF ➜ Image</button>
+    <button onclick="switchTab('wordToPdf')">Word ➜ PDF</button>
+    <button onclick="switchTab('pdfToWord')">PDF ➜ Word</button>
+    <button onclick="switchTab('wordToImage')">Word ➜ Image</button>
+    <!--<button onclick="switchTab('pdfPageRemover')">Pdf pages Remover</button> -->
+    <button onclick="switchTab('imageResizer')">imageResizer</button>
+  </nav>
+
+  <div id="toast"></div>
+  <div class="progress"><div id="progressBar"></div></div>
+
+  <section id="imageToPdf" class="tab-content">
+    <div class="drop-zone" id="imageDropZone">Click or Drop Images Here</div>
+    <input type="file" id="imageInput" accept="image/*" multiple hidden />
+    <div class="preview" id="imagePreview"></div>
+    <button class="btn" id="convertBtn">Convert to PDF</button>
+  </section>
+
+  <section id="pdfToImage" class="tab-content" style="display:none">
+    <div class="drop-zone" id="pdfDropZone">Click or Drop PDF Here</div>
+    <input type="file" id="pdfInput" accept="application/pdf" hidden />
+    <div class="preview" id="pdfPreview"></div>
+    <button class="btn" id="downloadAllBtn" style="display:none">Download All as ZIP</button>
+  </section>
+
+  <section id="wordToPdf" class="tab-content" style="display:none">
+    <div class="drop-zone" id="wordDropZone">Click or Drop Word File Here</div>
+    <input type="file" id="wordInput" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden />
+    <div class="preview" id="wordPreview"></div>
+    <button class="btn" id="convertWordToPdfBtn" style="display:none">Convert to PDF</button>
+  </section>
+  
+
+  <!-- PDF to Word Converter -->
+<section id="pdfToWord" class="tab-content" style="display:none">
+    <div class="drop-zone" id="pdfToWordDropZone">Click or Drop PDF File Here</div>
+    <input type="file" id="pdfToWordInput" accept="application/pdf" hidden />
+    <div class="preview" id="pdfToWordPreview"></div>
+    <button class="btn" id="convertPdfToWordBtn" style="display:none">Convert to Word</button>
+  </section>
+  
+  <!-- PDF Page Remover -->
+  <section id="pdfPageRemover" class="tab-content" style="display:none;">
+    <div class="drop-zone" id="pdfRemoverDropZone">Click or Drop PDF Here</div>
+    <input type="file" id="pdfRemoverInput" accept="application/pdf" hidden />
+    <div id="pdfPageList" class="page-list"></div>
+    <button class="btn" id="removePagesBtn" style="display:none;">Remove Selected Pages</button>
+  </section>
+  
+    
+  <!-- Image Resizer -->
+  <section id="imageResizer" class="tab-content" style="display:none">
+    <div class="drop-zone" id="imageResizeDropZone">Click or Drop Image Here</div>
+    <input type="file" id="imageResizeInput" accept="image/*" hidden />
+    <div class="preview" id="imageResizePreview"></div>
+    <label for="resizeWidth">Width (px):</label>
+    <input type="number" id="resizeWidth" />
+    <label for="resizeHeight">Height (px):</label>
+    <input type="number" id="resizeHeight" />
+    <button class="btn" id="resizeImageBtn" style="display:none">Resize Image</button>
+  </section>
+
+  <!-- Word to Image Converter -->
+  <section id="wordToImage" class="tab-content" style="display:none">
+    <div class="drop-zone" id="wordToImageDropZone">Click or Drop Word File Here</div>
+    <input type="file" id="wordToImageInput" accept=".doc,.docx" hidden />
+    <div id="wordImagePreview"></div>
+    <button class="btn" id="downloadWordImageBtn" style="display:none">Download as Image</button>
+  </section>
+  
+  <script src="https://unpkg.com/mammoth/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+
+
+  <script src="script.js"></script>
+</body>
+<footer class="footer">
+    <div class="footer-container">
+      <p class="footer-text">Connect with me:</p>
+      <div class="footer-icons">
+        <a href="https://www.linkedin.com/in/jonathan-a-02848a227/" target="_blank" aria-label="LinkedIn">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" class="icon-svg" />
+        </a>
+        <a href="https://github.com/JonathanLucky" target="_blank" aria-label="GitHub">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="icon-svg" />
+        </a>
+      </div>
+      <p class="footer-copy">Developed by <strong>Jonathan A</strong> © 2025</p>
+    </div>
+  </footer>
+  
+</html>
